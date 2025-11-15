@@ -31,6 +31,49 @@
   --glow-accent: 0 30px 60px rgba(154, 123, 255, 0.2);
 }
 
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes shimmerPulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulseOutline {
+  0% {
+    box-shadow: 0 0 0 0 var(--color-primary-soft);
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 [data-theme="dark"] {
   --color-bg: #05030a;
   --color-card: rgba(20, 10, 28, 0.92);
@@ -138,6 +181,20 @@ body::after {
   box-shadow: var(--glow-strong);
   position: relative;
   overflow: hidden;
+  animation: floatUp 0.7s ease-out both;
+  will-change: transform, opacity;
+}
+
+.page--access .hero {
+  animation-delay: 0.05s;
+}
+
+.page--access #access-guide {
+  animation-delay: 0.1s;
+}
+
+.page--access #password-card {
+  animation-delay: 0.2s;
 }
 
 .hero::after {
@@ -713,6 +770,146 @@ img.hero__logo {
   gap: 1.2rem;
 }
 
+.card--guide {
+  gap: 1.25rem;
+  background: color-mix(in srgb, var(--color-card) 85%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 28px 60px rgba(105, 70, 226, 0.18);
+}
+
+[data-theme="dark"] .card--guide {
+  background: color-mix(in srgb, var(--color-card) 95%, transparent);
+  border-color: rgba(167, 139, 255, 0.25);
+}
+
+.card--password {
+  position: relative;
+  overflow: hidden;
+}
+
+.card--password::before {
+  content: '';
+  position: absolute;
+  inset: -20% 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(circle at 80% 0%, rgba(154, 123, 255, 0.35), transparent 55%);
+  opacity: 0.8;
+  pointer-events: none;
+  animation: shimmerPulse 6s ease-in-out infinite;
+}
+
+.card--password > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card--password input[type='password'] {
+  font-size: 1.35rem;
+  letter-spacing: 0.08em;
+  padding: 1rem 1.3rem;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.85);
+  font-weight: 700;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+[data-theme="dark"] .card--password input[type='password'] {
+  background: rgba(5, 3, 10, 0.85);
+  color: var(--color-text);
+  border-color: rgba(167, 139, 255, 0.5);
+}
+
+.card--password:not(.card--password-filled) input[type='password'] {
+  animation: pulseOutline 2.6s ease-in-out infinite;
+}
+
+.card--password.card--password-focused input[type='password'],
+.card--password input[type='password']:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-primary-soft);
+  outline: none;
+}
+
+.card__eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.guide-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.guide-steps__item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--color-card) 92%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.guide-steps__badge {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 30px rgba(154, 123, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.guide-steps__body h3 {
+  margin: 0 0 0.25rem;
+}
+
+.guide-steps__body p {
+  margin: 0 0 0.3rem;
+  color: var(--color-muted);
+}
+
+.guide-steps__password {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin: 0.35rem 0;
+}
+
+.password-hint {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.password-hint strong {
+  font-size: 1.05rem;
+  color: var(--color-primary-dark);
+}
+
+@media (min-width: 720px) {
+  .guide-steps {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .guide-steps__item {
+    flex: 1 1 calc(50% - 0.85rem);
+  }
+}
+
 .card {
   background: var(--color-card);
   border-radius: 16px;
@@ -722,6 +919,8 @@ img.hero__logo {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  animation: floatUp 0.65s ease-out both;
+  will-change: transform, opacity;
 }
 
 .card--notice {
@@ -1111,6 +1310,11 @@ img.hero__logo {
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
+.btn--small {
+  font-size: 0.85rem;
+  padding: 0.45rem 1rem;
+}
+
 .btn:focus,
 .btn:hover {
   transform: translateY(-1px);
@@ -1148,6 +1352,13 @@ img.hero__logo {
   background: transparent;
   color: var(--color-primary-dark);
   box-shadow: inset 0 0 0 1px rgba(242, 109, 111, 0.35);
+}
+
+[data-fill-password][data-state='done'] {
+  background: var(--color-ok);
+  color: #0f352d;
+  box-shadow: 0 6px 24px rgba(99, 185, 166, 0.4);
+  border: none;
 }
 
 .btn--ok {
