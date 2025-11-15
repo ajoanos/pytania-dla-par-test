@@ -126,6 +126,115 @@ function focusElement(element) {
   setTimeout(() => element.focus(), 50);
 }
 
+function initAccessGuide(context = {}) {
+  const form = context.form || document.getElementById('password-form');
+  const card = context.card || document.getElementById('password-card');
+  const input = context.input || document.getElementById('access-password');
+  if (!form || !card) {
+    return;
+  }
+
+  const host = card.parentElement;
+  if (!host) {
+    return;
+  }
+
+  const passwordValue = form.dataset.password || ACCESS_PASSWORD;
+  let guide = document.getElementById('access-guide');
+  if (!guide) {
+    const heroTitle = document.querySelector('.hero__text h1')?.textContent?.trim();
+    const titleText = heroTitle ? `Dołącz do „${heroTitle}” w trzech krokach` : 'Dołącz do gry w trzech krokach';
+    guide = document.createElement('section');
+    guide.id = 'access-guide';
+    guide.className = 'card card--guide';
+    guide.innerHTML = `
+      <p class="card__eyebrow">Nowa stylistyka Momenty</p>
+      <h2>${titleText}</h2>
+      <ol class="guide-steps" role="list">
+        <li class="guide-steps__item" data-step="1">
+          <div class="guide-steps__badge">1</div>
+          <div class="guide-steps__body">
+            <h3>Wpisz hasło wejścia</h3>
+            <p>Jedno hasło działa we wszystkich kapsułach. Poniżej znajdziesz pole, które rozświetli się po kliknięciu.</p>
+            <p class="guide-steps__password">${passwordValue}</p>
+            <button type="button" class="btn btn--ghost btn--small" data-fill-password>Wklej hasło automatycznie</button>
+          </div>
+        </li>
+        <li class="guide-steps__item" data-step="2">
+          <div class="guide-steps__badge">2</div>
+          <div class="guide-steps__body">
+            <h3>Utwórz pokój</h3>
+            <p>Po zatwierdzeniu hasła poprosimy Cię tylko o wpisanie swojego imienia i wciśnięcie „Wejdź do pokoju”.</p>
+          </div>
+        </li>
+        <li class="guide-steps__item" data-step="3">
+          <div class="guide-steps__badge">3</div>
+          <div class="guide-steps__body">
+            <h3>Zaproszenie partnera</h3>
+            <p>Link do pokoju i kod QR pojawią się od razu. Możesz wysłać je SMS-em albo skopiować jednym kliknięciem.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="password-hint" role="status">Hasło dla tej kapsuły: <strong>${passwordValue}</strong></p>
+    `;
+    host.insertBefore(guide, card);
+  } else {
+    const passwordElement = guide.querySelector('.guide-steps__password');
+    if (passwordElement) {
+      passwordElement.textContent = passwordValue;
+    }
+    const hint = guide.querySelector('.password-hint strong');
+    if (hint) {
+      hint.textContent = passwordValue;
+    }
+  }
+
+  const applyFilledState = () => {
+    if (!input || !card) return;
+    if (input.value.trim()) {
+      card.classList.add('card--password-filled');
+    } else {
+      card.classList.remove('card--password-filled');
+    }
+  };
+
+  if (input) {
+    input.addEventListener('input', applyFilledState);
+    input.addEventListener('focus', () => card.classList.add('card--password-focused'));
+    input.addEventListener('blur', () => card.classList.remove('card--password-focused'));
+    applyFilledState();
+  }
+
+  const quickFillButtons = guide.querySelectorAll('[data-fill-password]');
+  quickFillButtons.forEach((button) => {
+    if (!(button instanceof HTMLButtonElement) || button.dataset.enhanced === 'true') {
+      return;
+    }
+    button.dataset.enhanced = 'true';
+    const defaultLabel = button.textContent;
+    button.addEventListener('click', () => {
+      if (!input) {
+        return;
+      }
+      input.value = passwordValue;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.focus();
+      const length = passwordValue.length;
+      try {
+        input.setSelectionRange(length, length);
+      } catch (error) {
+        console.warn('Selection range not supported', error);
+      }
+      button.dataset.state = 'done';
+      button.textContent = 'Hasło wklejone ✨';
+      setTimeout(() => {
+        button.removeAttribute('data-state');
+        button.textContent = defaultLabel;
+      }, 2600);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle(document.getElementById('theme-toggle'));
   initScrollLinks();
@@ -148,6 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const passwordInput = document.getElementById('access-password');
   const passwordError = document.getElementById('password-error');
   const passwordCancel = document.getElementById('password-cancel');
+  const passwordCard = document.getElementById('password-card');
+
+  initAccessGuide({ form: passwordForm, card: passwordCard, input: passwordInput });
 
   if (passwordForm) {
     const formPassword = passwordForm.dataset.password || ACCESS_PASSWORD;
