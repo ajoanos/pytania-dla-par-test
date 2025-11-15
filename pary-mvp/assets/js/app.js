@@ -2,6 +2,7 @@ const STORAGE_KEY_THEME = 'pary.theme';
 const ACCESS_PASSWORD = 'wedwoje25';
 const ACCESS_STORAGE_KEY = 'pary.access.pdp';
 const PLAN_ACCESS_STORAGE_KEY = 'momenty.planWieczoru.access';
+const LIVE_STATUS_URL = 'api/live-stats.json';
 
 export async function postJson(url, data) {
   const response = await fetch(url, {
@@ -78,6 +79,48 @@ export function initThemeToggle(button) {
   });
 }
 
+function initScrollLinks() {
+  const triggers = document.querySelectorAll('[data-scroll-target]');
+  if (!triggers.length) return;
+  triggers.forEach((trigger) => {
+    const targetSelector = trigger.dataset.scrollTarget;
+    if (!targetSelector) return;
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      const target = document.querySelector(targetSelector);
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+function initLiveStatus(element) {
+  if (!element || typeof fetch !== 'function') return;
+
+  const updateValue = (value) => {
+    element.textContent = value?.toString() || '—';
+  };
+
+  const load = async () => {
+    try {
+      const response = await fetch(LIVE_STATUS_URL, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Status ${response.status}`);
+      }
+      const payload = await response.json();
+      const count = payload?.active_rooms ?? payload?.activeRooms;
+      if (typeof count === 'number' && Number.isFinite(count)) {
+        updateValue(count);
+      }
+    } catch (error) {
+      console.warn('Nie udało się pobrać statusu pokojów', error);
+    }
+  };
+
+  load();
+  setInterval(load, 45000);
+}
+
 function focusElement(element) {
   if (!element) return;
   setTimeout(() => element.focus(), 50);
@@ -85,6 +128,8 @@ function focusElement(element) {
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle(document.getElementById('theme-toggle'));
+  initScrollLinks();
+  initLiveStatus(document.getElementById('live-count'));
 
   const productButtons = document.querySelectorAll('[data-action="open-product"]');
   productButtons.forEach((button) => {
