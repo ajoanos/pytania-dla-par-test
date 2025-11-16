@@ -3,6 +3,21 @@ const ACCESS_PASSWORD = 'wedwoje25';
 const ACCESS_STORAGE_KEY = 'pary.access.pdp';
 const PLAN_ACCESS_STORAGE_KEY = 'momenty.planWieczoru.access';
 const LIVE_STATUS_URL = 'api/live-stats.json';
+const NEW_BADGE_WINDOW_DAYS = 31;
+
+const GAME_LINKS = [
+  { href: 'pytania-dla-par.html', label: 'Pytania dla par' },
+  { href: 'plan-wieczoru.html', label: 'Plan Wieczoru – We Dwoje' },
+  { href: 'planszowa.html', label: 'Planszówka dla dwojga (dla dorosłych)' },
+  { href: 'planszowa-romantyczna.html', label: 'Planszówka romantyczna' },
+  { href: 'trio-challenge.html', label: 'Kółko i krzyżyk Wyzwanie' },
+  { href: 'zdrapka-pozycji.html', label: 'Zdrapka pozycji' },
+  { href: 'pozycje-na-czas.html', label: 'Pozycje na czas' },
+  { href: 'niegrzeczne-kolo.html', label: 'Niegrzeczne koło' },
+  { href: 'poznaj-wszystkie-pozycje.html', label: 'Poznaj wszystkie pozycje' },
+  { href: 'tinder-dla-sexu.html', label: 'Tinder z pozycjami' },
+  { href: 'nigdy-przenigdy.html', label: 'Nigdy przenigdy' },
+];
 
 export async function postJson(url, data) {
   const response = await fetch(url, {
@@ -90,6 +105,91 @@ function initScrollLinks() {
       const target = document.querySelector(targetSelector);
       if (!target) return;
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+function initGameSwitchers() {
+  const lists = document.querySelectorAll('.game-switcher__list');
+  if (!lists.length || !GAME_LINKS.length) return;
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+  lists.forEach((list) => {
+    list.innerHTML = '';
+    GAME_LINKS.forEach((game) => {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.className = 'game-switcher__link';
+      link.href = game.href;
+      link.textContent = game.label;
+      if (game.href === currentPath) {
+        link.setAttribute('aria-current', 'page');
+      }
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+  });
+}
+
+function initReleaseBadges() {
+  const cards = document.querySelectorAll('.product-card[data-release]');
+  if (!cards.length) return;
+  const now = Date.now();
+
+  cards.forEach((card) => {
+    const releaseValue = card.dataset.release;
+    if (!releaseValue) return;
+    const releaseDate = new Date(releaseValue);
+    const releaseTime = releaseDate.getTime();
+    if (Number.isNaN(releaseTime)) return;
+    const daysSinceRelease = (now - releaseTime) / (1000 * 60 * 60 * 24);
+    if (daysSinceRelease < 0 || daysSinceRelease > NEW_BADGE_WINDOW_DAYS) {
+      return;
+    }
+    const meta = card.querySelector('.product-card__meta');
+    if (!meta) return;
+    const badge = document.createElement('span');
+    badge.className = 'product-card__badge product-card__badge--new';
+    const label = card.dataset.releaseLabel?.trim();
+    badge.textContent = label || 'Nowość';
+    meta.appendChild(badge);
+  });
+}
+
+function initProductCardShortcuts() {
+  const cards = document.querySelectorAll('.product-card');
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    const primaryAction = card.querySelector('[data-action="open-product"]');
+    if (!primaryAction) return;
+
+    const resolveTarget = () => primaryAction.dataset.target || primaryAction.getAttribute('href');
+    const openTarget = () => {
+      const target = resolveTarget();
+      if (target) {
+        window.location.href = target;
+      }
+    };
+
+    if (!card.hasAttribute('tabindex')) {
+      card.setAttribute('tabindex', '0');
+    }
+
+    card.addEventListener('click', (event) => {
+      if (event.defaultPrevented) return;
+      const interactiveTarget = event.target?.closest?.('a, button');
+      if (interactiveTarget) {
+        return;
+      }
+      openTarget();
+    });
+
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openTarget();
+      }
     });
   });
 }
@@ -239,6 +339,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle(document.getElementById('theme-toggle'));
   initScrollLinks();
   initLiveStatus(document.getElementById('live-count'));
+  initGameSwitchers();
+  initReleaseBadges();
+  initProductCardShortcuts();
 
   const productButtons = document.querySelectorAll('[data-action="open-product"]');
   productButtons.forEach((button) => {
