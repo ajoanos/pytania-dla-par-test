@@ -3,6 +3,295 @@ const ACCESS_PASSWORD = 'wedwoje25';
 const ACCESS_STORAGE_KEY = 'pary.access.pdp';
 const PLAN_ACCESS_STORAGE_KEY = 'momenty.planWieczoru.access';
 
+const HOW_TO_PLAY = {
+  index: {
+    title: 'Jak korzystać z Momentów',
+    steps: [
+      'Wybierz grę z listy i włącz motyw, który pasuje do Waszego nastroju.',
+      'Wpisz hasło, żeby odblokować pokój i wygenerować link do wspólnej zabawy.',
+      'Udostępnij link partnerowi lub znajomym – wszyscy widzą to samo w czasie rzeczywistym.',
+      'Korzystaj z jasnych kart instrukcji na każdej stronie, aby płynnie przechodzić do rozgrywki.',
+    ],
+    meta: {
+      vibe: 'Premium + neon',
+      duration: '5–60 min',
+      players: '2–6 graczy',
+    },
+  },
+  'pytania-dla-par': {
+    title: 'Jak grać: Pytania dla par',
+    steps: [
+      'Podaj hasło i pozwól aplikacji wygenerować pokój z linkiem.',
+      'Na zmianę losuj pytania i odpowiadaj bez podglądania partnera.',
+      'Oznacz najciekawsze tematy gwiazdką, aby wrócić do nich później.',
+      'Po zakończeniu zapisz wrażenia lub zrób zdjęcie ekranu, żeby zachować wspomnienia.',
+    ],
+    meta: {
+      duration: '10–30 min',
+      vibe: 'Szczere rozmowy',
+      players: 'Dwie osoby',
+    },
+  },
+  'nigdy-przenigdy': {
+    title: 'Jak grać: Nigdy przenigdy',
+    steps: [
+      'Odblokuj pokój i dodaj uczestników – mogą grać zdalnie.',
+      'Losuj stwierdzenia, a każdy głosuje kciukiem w górę lub w dół.',
+      'Po głosowaniu system wyświetla podsumowanie – przegrany może wylosować zadanie.',
+      'Zmień talie, aby przeskoczyć między tematami lekkimi i pikantnymi.',
+    ],
+    meta: {
+      duration: '10–25 min',
+      vibe: 'Szybkie wyznania',
+      players: '2–8 graczy',
+    },
+  },
+  '5-7-10': {
+    title: 'Jak grać: 5 • 7 • 10 sekund',
+    steps: [
+      'Dodaj graczy i wybierz ulubione kategorie pytań.',
+      'Kliknij start – timer od razu pokazuje 5, 7 lub 10 sekund na odpowiedź.',
+      'Po każdej rundzie zaznacz, kto zdążył odpowiedzieć na czas.',
+      'Na koniec zobacz ranking i wybierz następną kategorię bez wychodzenia z pokoju.',
+    ],
+    meta: {
+      duration: '8–20 min',
+      vibe: 'Błyskawiczne decyzje',
+      players: '2–6 graczy',
+    },
+  },
+  'prawda-wyzwanie': {
+    title: 'Jak grać: Prawda czy wyzwanie',
+    steps: [
+      'Wybierz talie (delikatne, imprezowe lub pikantne) i odblokuj pokój.',
+      'Losuj pytania lub wyzwania, a reszta ocenia wykonanie jak w 5•7•10.',
+      'Skorzystaj z licznika, aby utrzymać tempo i uniknąć przestojów.',
+      'Jeśli ktoś odmówi, kliknij „pomiń” – aplikacja sama przejdzie do kolejnej karty.',
+    ],
+    meta: {
+      duration: '12–30 min',
+      vibe: 'Adrenalina + śmiech',
+      players: '2–8 graczy',
+    },
+  },
+  'plan-wieczoru': {
+    title: 'Jak grać: Plan Wieczoru',
+    steps: [
+      'Podaj hasło i odpowiedz na szybkie pytania o nastrój, energię i dostępny czas.',
+      'Aplikacja generuje gotowy scenariusz – od przygotowania po finał.',
+      'Kliknij „Wyślij” i podziel się planem z partnerem SMS-em lub mailem.',
+      'Po spotkaniu wróć do planu i zaznacz, co zadziałało, aby kolejne wieczory były jeszcze lepsze.',
+    ],
+    meta: {
+      duration: '15–90 min',
+      vibe: 'Kameralnie',
+      players: 'Dwie osoby',
+    },
+  },
+  planszowa: {
+    title: 'Jak grać: Planszówka dla dwojga (dla dorosłych)',
+    steps: [
+      'Odblokuj pokój i dołączcie oboje – aplikacja zsynchronizuje ruchy pionków.',
+      'Rzuć wirtualną kostką i przesuwaj się po planszy, zbierając serduszka.',
+      'Po wejściu na pole otwórz kartę zadania i wykonaj je razem lub solo.',
+      'Po wygranej zapisz punkty, a jeśli macie czas, zacznijcie kolejną rundę z nową talią.',
+    ],
+    meta: {
+      duration: '20–40 min',
+      vibe: 'Rywalizacja + bliskość',
+      players: '2 osoby',
+    },
+  },
+  'planszowa-romantyczna': {
+    title: 'Jak grać: Planszówka romantyczna',
+    steps: [
+      'Utwórz pokój, dodaj partnera i wybierz poziom czułości.',
+      'Kolejne pola prowadzą przez pytania, rytuały i mikro-wyzwania w parze.',
+      'Oznacz ulubione pola serduszkiem, żeby aplikacja proponowała podobne w przyszłości.',
+      'Po przejściu całej planszy wyświetl podsumowanie i wybierz rytuał zakończenia.',
+    ],
+    meta: {
+      duration: '25–45 min',
+      vibe: 'Czułe tempo',
+      players: 'Dwie osoby',
+    },
+  },
+  'trio-challenge': {
+    title: 'Jak grać: Kółko i krzyżyk Wyzwanie',
+    steps: [
+      'Stwórz pokój 4×4 i zaproś rywala – każdy wybiera swój znak.',
+      'Tryb sekretny ukrywa część pól; odkryjecie je, gdy ktoś postawi tam swój znak.',
+      'Ułóż linię z trzech symboli; przegrany losuje zadanie z talii.',
+      'Jeżeli remis, kliknij „restart” – nowa plansza ma świeże ukryte pola.',
+    ],
+    meta: {
+      duration: '8–18 min',
+      vibe: 'Rywalizacja',
+      players: '2 osoby',
+    },
+  },
+  'niegrzeczne-kolo': {
+    title: 'Jak grać: Niegrzeczne koło',
+    steps: [
+      'Wybierzcie, kto pierwszy kręci i kliknijcie, aby zakręcić kołem.',
+      'Kiedy koło się zatrzyma, odczytaj wylosowaną pozycję lub scenariusz.',
+      'Jeśli macie ochotę, kliknij „kręć jeszcze raz” i mieszajcie kategorie.',
+      'Dodajcie własne zasady punktacji lub kary, by podbić emocje.',
+    ],
+    meta: {
+      duration: '5–20 min',
+      vibe: 'Luźno i pikantnie',
+      players: '2–4 graczy',
+    },
+  },
+  'zdrapka-pozycji': {
+    title: 'Jak grać: Zdrapka pozycji',
+    steps: [
+      'Kliknij, aby odkryć kolor zdrapki – potrzyj ekran, żeby odsłonić pozycję.',
+      'Po odkryciu użyj przycisku, by wylosować kolejną kartę bez cofania się.',
+      'Jeśli pozycja Wam pasuje, przypnij ją do ulubionych i udostępnij link.',
+      'Dla większej losowości włącz tryb ciemny – kolory zdrapek zmieniają klimat.',
+    ],
+    meta: {
+      duration: '5–15 min',
+      vibe: 'Element zaskoczenia',
+      players: '2 osoby',
+    },
+  },
+  'pozycje-na-czas': {
+    title: 'Jak grać: Pozycje na czas',
+    steps: [
+      'Losuj pozycję, wybierz 60 lub 120 sekund i kliknij start.',
+      'Timer kończy się pulsującą ramką – wtedy możecie zmienić lub powtórzyć pozę.',
+      'Dodajcie własne reguły: punkty za kreatywność albo „rewanż” dla drugiej osoby.',
+      'Jeśli coś nie pasuje, wylosujcie nową kartę bez zatrzymywania zegara.',
+    ],
+    meta: {
+      duration: '10–25 min',
+      vibe: 'Dynamiczna energia',
+      players: '2 osoby',
+    },
+  },
+  'poznaj-wszystkie-pozycje': {
+    title: 'Jak grać: Poznaj wszystkie pozycje',
+    steps: [
+      'Przeglądaj katalog pozycji i czytaj wskazówki ruchu oraz bezpieczeństwa.',
+      'Kliknij serduszko przy ulubionych, aby zbudować własną shortlistę.',
+      'Udostępnij listę partnerowi – to Wasza wspólna mapa inspiracji.',
+      'Wróć do katalogu i odkrywaj filtry tempa oraz poziomu intensywności.',
+    ],
+    meta: {
+      duration: '15–40 min',
+      vibe: 'Eksploracja',
+      players: '2 osoby',
+    },
+  },
+  'tinder-dla-sexu': {
+    title: 'Jak grać: Tinder z pozycjami',
+    steps: [
+      'Utwórz wspólny pokój i ustal liczbę pozycji do przetestowania.',
+      'Swipujcie w prawo, jeśli coś Was kręci, w lewo – jeżeli nie macie ochoty.',
+      'Aplikacja wyłoni „match” tam, gdzie oboje daliście serduszko.',
+      'Zapiszcie matchlistę i odpalcie timer z poziomu pokoju, by przejść do działania.',
+    ],
+    meta: {
+      duration: '10–30 min',
+      vibe: 'Szybkie decyzje',
+      players: '2 osoby',
+    },
+  },
+};
+
+const HOW_TO_ALIASES = {
+  'pytania-dla-par-room': 'pytania-dla-par',
+  'pytania-dla-par-waiting': 'pytania-dla-par',
+  'plan-wieczoru-room': 'plan-wieczoru',
+  'plan-wieczoru-play': 'plan-wieczoru',
+  'plan-wieczoru-accept': 'plan-wieczoru',
+  'plan-wieczoru-accept.php': 'plan-wieczoru',
+  'planszowa-room': 'planszowa',
+  'planszowa-board': 'planszowa',
+  'planszowa-invite': 'planszowa',
+  'planszowa-waiting': 'planszowa',
+  'planszowa-romantyczna-room': 'planszowa-romantyczna',
+  'planszowa-romantyczna-board': 'planszowa-romantyczna',
+  'planszowa-romantyczna-invite': 'planszowa-romantyczna',
+  'planszowa-romantyczna-waiting': 'planszowa-romantyczna',
+  'trio-challenge-room': 'trio-challenge',
+  'trio-challenge-board': 'trio-challenge',
+  'trio-challenge-invite': 'trio-challenge',
+  'trio-challenge-waiting': 'trio-challenge',
+  'niegrzeczne-kolo-play': 'niegrzeczne-kolo',
+  'zdrapka-pozycji-play': 'zdrapka-pozycji',
+  'pozycje-na-czas-play': 'pozycje-na-czas',
+  'poznaj-wszystkie-pozycje-play': 'poznaj-wszystkie-pozycje',
+  'tinder-dla-sexu-room': 'tinder-dla-sexu',
+  'tinder-dla-sexu-waiting': 'tinder-dla-sexu',
+  'tinder-dla-sexu-invite': 'tinder-dla-sexu',
+  '5-7-10-room': '5-7-10',
+};
+
+function resolvePageKey() {
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const name = path.replace(/\.(html|php)$/i, '');
+  const normalized = name.replace(/-(room|waiting|board|invite|play)$/i, '');
+  return HOW_TO_ALIASES[name] || HOW_TO_ALIASES[normalized] || normalized || 'index';
+}
+
+function renderHowToCard() {
+  const key = resolvePageKey();
+  const data = HOW_TO_PLAY[key];
+  const container = document.querySelector('.container');
+  const hero = document.querySelector('.hero');
+  if (!data || !container) return;
+
+  const section = document.createElement('section');
+  section.className = 'card card--howto';
+  section.setAttribute('aria-label', 'Jak grać');
+
+  const header = document.createElement('div');
+  header.className = 'howto__header';
+
+  const title = document.createElement('h2');
+  title.className = 'howto__title';
+  title.textContent = data.title;
+  header.appendChild(title);
+
+  if (data.meta) {
+    const meta = document.createElement('div');
+    meta.className = 'howto__meta';
+    Object.entries(data.meta).forEach(([label, value]) => {
+      const chip = document.createElement('span');
+      chip.className = 'howto__chip';
+      chip.textContent = `${label.toUpperCase()}: ${value}`;
+      meta.appendChild(chip);
+    });
+    header.appendChild(meta);
+  }
+
+  section.appendChild(header);
+
+  const list = document.createElement('ol');
+  list.className = 'howto__list';
+  data.steps.forEach((step) => {
+    const li = document.createElement('li');
+    li.textContent = step;
+    list.appendChild(li);
+  });
+  section.appendChild(list);
+
+  const note = document.createElement('p');
+  note.className = 'howto__note';
+  note.textContent = 'Chcesz zacząć szybciej? Udostępnij link z pokoju i włącz tryb pełnoekranowy.';
+  section.appendChild(note);
+
+  if (hero && hero.parentNode) {
+    hero.insertAdjacentElement('afterend', section);
+  } else {
+    container.prepend(section);
+  }
+}
+
 export async function postJson(url, data) {
   const response = await fetch(url, {
     method: 'POST',
@@ -85,6 +374,7 @@ function focusElement(element) {
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle(document.getElementById('theme-toggle'));
+  renderHowToCard();
 
   const productButtons = document.querySelectorAll('[data-action="open-product"]');
   productButtons.forEach((button) => {
