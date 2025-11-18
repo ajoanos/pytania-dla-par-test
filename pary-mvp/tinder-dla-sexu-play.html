@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex" />
   <title>Tinder z pozycjami – Pokój</title>
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="momenty-theme.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,17 @@
   <script type="module" src="assets/js/app.js"></script>
   <script type="module" src="assets/js/tinder-game.js"></script>
 </head>
-<body class="page page--room" data-theme="light">
+<body class="page page--room momenty-app" data-theme="light" data-game-id="tinder_pozycje">
+  <div class="game-topbar">
+    <div>
+      <p class="game-topbar__title">Tinder z pozycjami</p>
+      <p class="game-topbar__subtitle">Swipujcie propozycje i zostawiajcie tylko wspólne match’e.</p>
+    </div>
+    <div class="game-topbar__actions">
+      <a class="btn btn-ghost" href="index.html">Zmień grę</a>
+      <button class="btn btn-secondary" type="button" data-action="open-rules">Zasady</button>
+    </div>
+  </div>
   <main class="container">
     <header class="hero">
       <div class="hero__branding">
@@ -178,5 +189,55 @@
       <button type="button" class="btn btn--ghost" id="share-qr-close">Zamknij</button>
     </div>
   </div>
+
+  <div class="game-intro-overlay">
+    <div class="game-intro">
+      <h2>Zanim zaczniecie…</h2>
+      <p>Swipujcie tylko to, co naprawdę Was ciekawi. Wspólne match’e tworzą listę inspiracji.</p>
+      <ul>
+        <li>Możecie grać obok siebie lub na dwóch urządzeniach.</li>
+        <li>Każdą kartę można odrzucić bez komentarza – zgoda jest kluczowa.</li>
+        <li>Listę możecie edytować i usuwać elementy w każdej chwili.</li>
+      </ul>
+      <div class="game-overlay__actions">
+        <button class="btn btn-primary" type="button" data-intro-start>Zaczynamy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="rules-modal" aria-hidden="true" role="dialog">
+    <div class="modal__dialog">
+      <div class="modal__header">
+        <h3>Zasady gry</h3>
+        <button class="modal__close" type="button" data-action="close-modal">Zamknij</button>
+      </div>
+      <div class="modal__body">
+        <p>Swipujcie karty w lewo lub prawo. Tylko wspólne „tak” zapisują się na liście – reszta znika.</p>
+        <p>Możecie wysłać kod QR lub link, aby partner dołączył do pokoju. Nic nie zapisuje się poza Waszym urządzeniem.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game-intro.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('rules-modal');
+      const openBtn = document.querySelector('[data-action="open-rules"]');
+      const closeBtn = modal?.querySelector('[data-action="close-modal"]');
+      const openModal = () => {
+        modal?.classList.add('is-open');
+        modal?.setAttribute('aria-hidden', 'false');
+      };
+      const closeModal = () => {
+        modal?.classList.remove('is-open');
+        modal?.setAttribute('aria-hidden', 'true');
+      };
+      openBtn?.addEventListener('click', openModal);
+      closeBtn?.addEventListener('click', closeModal);
+      modal?.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+      });
+    });
+  </script>
 </body>
 </html>

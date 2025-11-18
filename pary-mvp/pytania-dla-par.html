@@ -15,23 +15,29 @@
   <div class="access-screen">
     <div class="access-card">
       <h1 class="access-card__title">Pytania dla par</h1>
-      <p class="access-card__subtitle">Spokojne pytania, które pomagają dostrzec się na nowo i usłyszeć siebie nawzajem.</p>
-      <ol class="access-card__steps">
-        <li>Ustalcie, kto tworzy pokój i udostępnia link.</li>
-        <li>Połączcie się, by odpowiadać na pytania we własnym tempie.</li>
-        <li>Możecie pominąć dowolne pytanie, jeśli wolicie wrócić do niego później.</li>
-      </ol>
-      <form class="access-card__form" data-target-url="pytania-dla-par-room.html">
-        <input type="password" class="access-card__input" placeholder="Hasło" autocomplete="current-password" />
+      <p class="access-card__subtitle">Losujcie pytania, odpowiadajcie na zmianę i dawajcie sobie czas na spokojne rozmowy. To przestrzeń na ciekawość, a nie ocenę.</p>
+      <ul class="access-card__tips">
+        <li>Ustalcie, kto tworzy pokój i udostępnia link partnerowi.</li>
+        <li>Możecie pomijać pytania, które chcecie zostawić na później.</li>
+        <li>Wracajcie do ulubionych kart – wszystkie działają offline w pokoju.</li>
+      </ul>
+      <form
+        id="password-form"
+        class="access-card__form"
+        data-success="pytania-dla-par-room.html"
+        data-storage-key="pary.access.pdp"
+      >
+        <input type="password" id="access-password" class="access-card__input" placeholder="Hasło" autocomplete="current-password" required />
         <div class="access-card__actions">
-          <button type="submit" class="btn btn-primary">Wejdź do gry</button>
+          <button type="submit" class="btn btn-primary">Potwierdź</button>
           <a class="btn btn-ghost" href="index.html">Wróć</a>
         </div>
-        <div class="access-card__error"></div>
+        <div class="access-card__error" id="password-error"></div>
       </form>
-      <p class="access-card__safety">Wasze odpowiedzi pozostają w pokoju gry. Możecie przerwać w dowolnym momencie.</p>
+      <p class="access-card__safety">Wasze odpowiedzi i wybory są przetwarzane tylko w prywatnym pokoju. Nie zapisujemy treści rozmów na serwerze. Możecie w każdej chwili przerwać grę.</p>
     </div>
   </div>
   <script src="access.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

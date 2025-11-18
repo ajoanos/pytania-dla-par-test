@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
-  <title>Plan wieczoru – Dostęp</title>
+  <title>Plan Wieczoru – Dostęp</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="momenty-theme.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,24 +14,30 @@
 <body class="momenty-app">
   <div class="access-screen">
     <div class="access-card">
-      <h1 class="access-card__title">Plan wieczoru</h1>
-      <p class="access-card__subtitle">Przejdźcie krótki rytuał, żeby wspólnie wybrać klimat Waszego wieczoru.</p>
-      <ol class="access-card__steps">
-        <li>Ustalcie, kto tworzy pokój i wysyła kod.</li>
-        <li>Odpowiadajcie na pytania i wybierajcie elementy planu.</li>
-        <li>Na końcu zobaczycie gotowy scenariusz, którym możecie się podzielić.</li>
-      </ol>
-      <form class="access-card__form" data-target-url="plan-wieczoru-room.html">
-        <input type="password" class="access-card__input" placeholder="Hasło" autocomplete="current-password" />
+      <h1 class="access-card__title">Plan Wieczoru – We Dwoje</h1>
+      <p class="access-card__subtitle">Przejdźcie krótki rytuał, żeby ustalić, jaki wieczór jest Wam dziś najbardziej potrzebny – spokojny, romantyczny czy szalony.</p>
+      <ul class="access-card__tips">
+        <li>Załóżcie pokój, aby zaprosić partnera do wspólnego planowania.</li>
+        <li>Odpowiadajcie zgodnie ze swoim nastrojem – wynik możecie zmienić w każdej chwili.</li>
+        <li>Wysyłajcie gotowy plan e-mailem lub pokażcie go partnerowi na ekranie.</li>
+      </ul>
+      <form
+        id="password-form"
+        class="access-card__form"
+        data-success="plan-wieczoru-room.html"
+        data-storage-key="momenty.planWieczoru.access"
+      >
+        <input type="password" id="access-password" class="access-card__input" placeholder="Hasło" autocomplete="current-password" required />
         <div class="access-card__actions">
-          <button type="submit" class="btn btn-primary">Zaczynajmy</button>
+          <button type="submit" class="btn btn-primary">Potwierdź</button>
           <a class="btn btn-ghost" href="index.html">Wróć</a>
         </div>
-        <div class="access-card__error"></div>
+        <div class="access-card__error" id="password-error"></div>
       </form>
-      <p class="access-card__safety">Możecie zmienić zdanie w dowolnym momencie. Liczy się wspólny komfort.</p>
+      <p class="access-card__safety">Wasze odpowiedzi i wybory są przetwarzane tylko w prywatnym pokoju. Nie zapisujemy treści rozmów na serwerze. Możecie w każdej chwili przerwać grę.</p>
     </div>
   </div>
   <script src="access.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

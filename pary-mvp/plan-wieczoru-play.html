@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex" />
   <title>Plan Wieczoru – We Dwoje</title>
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="momenty-theme.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,17 @@
   <script type="module" src="assets/js/app.js"></script>
   <script type="module" src="assets/js/plan-wieczoru.js"></script>
 </head>
-<body class="page page--game" data-theme="light">
+<body class="page page--game momenty-app" data-theme="light" data-game-id="plan_wieczoru">
+  <div class="game-topbar">
+    <div>
+      <p class="game-topbar__title">Plan Wieczoru – We Dwoje</p>
+      <p class="game-topbar__subtitle">Krótki rytuał planowania wieczoru, w którym tempo ustalacie razem.</p>
+    </div>
+    <div class="game-topbar__actions">
+      <a class="btn btn-ghost" href="index.html">Zmień grę</a>
+      <button class="btn btn-secondary" type="button" data-action="open-rules">Zasady</button>
+    </div>
+  </div>
   <main class="container">
     <header class="hero">
       <div class="hero__branding">
@@ -132,5 +143,55 @@
       </nav>
     </footer>
   </main>
+
+  <div class="game-intro-overlay">
+    <div class="game-intro">
+      <h2>Zanim zaczniecie…</h2>
+      <p>Przejdźcie przez kilka pytań, aby ustalić, jakiego wieczoru potrzebujecie i jak go rozplanować.</p>
+      <ul>
+        <li>Odpowiadajcie szczerze – wyniki widzicie tylko Wy i możecie je poprawić.</li>
+        <li>Wybierajcie propozycje, które są komfortowe dla obu stron.</li>
+        <li>Odłóżcie inne urządzenia, żeby skupić się na rozmowie.</li>
+      </ul>
+      <div class="game-overlay__actions">
+        <button class="btn btn-primary" type="button" data-intro-start>Zaczynamy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="rules-modal" aria-hidden="true" role="dialog">
+    <div class="modal__dialog">
+      <div class="modal__header">
+        <h3>Zasady gry</h3>
+        <button class="modal__close" type="button" data-action="close-modal">Zamknij</button>
+      </div>
+      <div class="modal__body">
+        <p>Odpowiedzcie na kilka pytań o Wasz nastrój, a aplikacja podpowie, czy wolicie wieczór spokojny, romantyczny czy bardziej energiczny.</p>
+        <p>Każdy krok można poprawić, a plan możecie wysłać partnerowi albo przejść przez niego razem.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game-intro.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('rules-modal');
+      const openBtn = document.querySelector('[data-action="open-rules"]');
+      const closeBtn = modal?.querySelector('[data-action="close-modal"]');
+      const openModal = () => {
+        modal?.classList.add('is-open');
+        modal?.setAttribute('aria-hidden', 'false');
+      };
+      const closeModal = () => {
+        modal?.classList.remove('is-open');
+        modal?.setAttribute('aria-hidden', 'true');
+      };
+      openBtn?.addEventListener('click', openModal);
+      closeBtn?.addEventListener('click', closeModal);
+      modal?.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+      });
+    });
+  </script>
 </body>
 </html>

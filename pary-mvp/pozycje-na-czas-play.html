@@ -6,13 +6,24 @@
   <meta name="robots" content="noindex" />
   <title>Pozycje na czas</title>
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="momenty-theme.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
   <script type="module" src="assets/js/pozycje-na-czas.js"></script>
 </head>
-<body class="page page--timer" data-theme="dark">
+<body class="page page--timer momenty-app" data-theme="dark" data-game-id="pozycje_na_czas">
+  <div class="game-topbar">
+    <div>
+      <p class="game-topbar__title">Pozycje na czas</p>
+      <p class="game-topbar__subtitle">Losujcie propozycję i ustawcie wspólny timer – komfort ponad wynik.</p>
+    </div>
+    <div class="game-topbar__actions">
+      <a class="btn btn-ghost" href="index.html">Zmień grę</a>
+      <button class="btn btn-secondary" type="button" data-action="open-rules">Zasady</button>
+    </div>
+  </div>
   <main class="container">
     <header class="hero">
       <div class="hero__branding">
@@ -104,5 +115,55 @@
       </div>
     </div>
   </div>
+
+  <div class="game-intro-overlay">
+    <div class="game-intro">
+      <h2>Zanim zaczniecie…</h2>
+      <p>Losujcie propozycję i ustawiajcie wspólny timer tylko na to, na co macie ochotę.</p>
+      <ul>
+        <li>Ustalcie długość czasu, który jest komfortowy dla Was obojga.</li>
+        <li>Dowolną propozycję możecie pominąć i wylosować nową.</li>
+        <li>Jeśli coś nie pasuje, zatrzymajcie licznik i wróćcie do spokojniejszego tempa.</li>
+      </ul>
+      <div class="game-overlay__actions">
+        <button class="btn btn-primary" type="button" data-intro-start>Zaczynamy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="rules-modal" aria-hidden="true" role="dialog">
+    <div class="modal__dialog">
+      <div class="modal__header">
+        <h3>Zasady gry</h3>
+        <button class="modal__close" type="button" data-action="close-modal">Zamknij</button>
+      </div>
+      <div class="modal__body">
+        <p>Losujcie pozycję, wybierzcie czas i obserwujcie odliczanie. Możecie pauzować lub zresetować licznik, kiedy tylko tego potrzebujecie.</p>
+        <p>Każdą propozycję możecie pominąć – gra ma wspierać Wasz komfort.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game-intro.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('rules-modal');
+      const openBtn = document.querySelector('[data-action="open-rules"]');
+      const closeBtn = modal?.querySelector('[data-action="close-modal"]');
+      const openModal = () => {
+        modal?.classList.add('is-open');
+        modal?.setAttribute('aria-hidden', 'false');
+      };
+      const closeModal = () => {
+        modal?.classList.remove('is-open');
+        modal?.setAttribute('aria-hidden', 'true');
+      };
+      openBtn?.addEventListener('click', openModal);
+      closeBtn?.addEventListener('click', closeModal);
+      modal?.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+      });
+    });
+  </script>
 </body>
 </html>

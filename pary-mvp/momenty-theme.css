@@ -13,6 +13,8 @@
   --radius-xl: 28px;
   --shadow-soft: 0 15px 40px rgba(0, 0, 0, 0.25);
   --transition-base: all 200ms ease;
+  --safe: rgba(113, 186, 255, 0.16);
+  --family: rgba(246, 211, 101, 0.16);
 }
 
 * {
@@ -29,11 +31,53 @@ body.momenty-app {
   flex-direction: column;
 }
 
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+h2 {
+  font-size: clamp(22px, 3vw, 30px);
+}
+
+h3 {
+  font-size: clamp(18px, 2.6vw, 24px);
+}
+
 .app-shell {
   width: 100%;
   max-width: 1080px;
   margin: 0 auto;
   padding: 32px 20px 60px;
+}
+
+.app-hero {
+  margin-top: 26px;
+  padding: 22px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+}
+
+.app-hero p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+
+.app-hero__tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
 }
 
 .app-header {
@@ -79,6 +123,18 @@ body.momenty-app {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 300ms ease, transform 300ms ease, box-shadow var(--transition-base);
+}
+
+.game-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.game-card__tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .game-card--visible {
@@ -132,6 +188,10 @@ body.momenty-app {
   border-color: rgba(246, 211, 101, 0.8);
 }
 
+.game-tag--safe {
+  border-color: var(--safe);
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -155,6 +215,16 @@ body.momenty-app {
 .btn-primary:hover {
   transform: translateY(-1px) scale(1.01);
   box-shadow: 0 18px 36px rgba(255, 127, 138, 0.4);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px) scale(1.01);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .btn-ghost {
@@ -184,6 +254,10 @@ body.momenty-app {
   box-shadow: var(--shadow-soft);
   backdrop-filter: blur(12px);
   transition: var(--transition-base);
+}
+
+.access-card--success {
+  animation: accessFade 320ms ease forwards;
 }
 
 .access-card__title {
@@ -223,6 +297,21 @@ body.momenty-app {
   font-size: 14px;
 }
 
+.access-card__tips {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  color: var(--text-muted);
+}
+
+.access-card__tips li::before {
+  content: "•";
+  margin-right: 6px;
+  color: var(--accent-solid);
+}
+
 .access-card__safety {
   margin-top: 6px;
   font-size: 13px;
@@ -237,6 +326,18 @@ body.momenty-app {
 
 .access-card--shake {
   animation: shake 450ms ease;
+}
+
+@keyframes accessFade {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.9;
+    transform: scale(0.99);
+    filter: blur(2px);
+  }
 }
 
 @keyframes shake {
@@ -276,6 +377,12 @@ body.momenty-app {
   gap: 10px;
 }
 
+.game-topbar__badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .game-intro-overlay {
   position: fixed;
   inset: 0;
@@ -285,6 +392,12 @@ body.momenty-app {
   place-items: center;
   padding: 20px;
   z-index: 1000;
+}
+
+.game-intro-overlay--hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
 }
 
 .game-intro {
@@ -314,6 +427,122 @@ body.momenty-app {
   line-height: 1.5;
 }
 
+.game-overlay__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.room-form {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.room-form__choices {
+  display: grid;
+  gap: 8px;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.room-form__fields {
+  display: grid;
+  gap: 10px;
+}
+
+.form-field {
+  display: grid;
+  gap: 6px;
+}
+
+.form-field input,
+.form-field textarea,
+.room-form input,
+.room-form textarea,
+.room-form select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+}
+
+.form-hint,
+.room-form__hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.room-form__notice {
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px dashed var(--card-border);
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(8, 9, 24, 0.7);
+  backdrop-filter: blur(12px);
+  z-index: 1200;
+  padding: 18px;
+}
+
+.modal.is-open {
+  display: grid;
+}
+
+.modal__dialog {
+  width: min(640px, 100%);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.modal__body {
+  color: var(--text-muted);
+  line-height: 1.6;
+  display: grid;
+  gap: 10px;
+}
+
+.modal__close {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.badge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 @media (min-width: 768px) {
   .app-header__titles h1 {
     font-size: 36px;
@@ -321,5 +550,22 @@ body.momenty-app {
 
   .game-topbar__title {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .game-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .game-topbar__actions {
+    width: 100%;
+    flex-wrap: wrap;
   }
 }
