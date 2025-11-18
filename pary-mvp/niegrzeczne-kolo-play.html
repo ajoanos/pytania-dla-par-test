@@ -6,13 +6,24 @@
   <meta name="robots" content="noindex" />
   <title>Niegrzeczne koło</title>
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="momenty-theme.css" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
   <script type="module" src="assets/js/niegrzeczne-kolo.js"></script>
 </head>
-<body class="page page--wheel" data-theme="dark">
+<body class="page page--wheel momenty-app" data-theme="dark" data-game-id="niegrzeczne_kolo">
+  <div class="game-topbar">
+    <div>
+      <p class="game-topbar__title">Niegrzeczne koło</p>
+      <p class="game-topbar__subtitle">Losujcie propozycje i wybierajcie tylko to, co pasuje Wam obojgu.</p>
+    </div>
+    <div class="game-topbar__actions">
+      <a class="btn btn-ghost" href="index.html">Zmień grę</a>
+      <button class="btn btn-secondary" type="button" data-action="open-rules">Zasady</button>
+    </div>
+  </div>
   <main class="container">
     <header class="hero">
       <div class="hero__branding">
@@ -77,5 +88,55 @@
       </nav>
     </footer>
   </main>
+
+  <div class="game-intro-overlay">
+    <div class="game-intro">
+      <h2>Zanim zaczniecie…</h2>
+      <p>To koło ma inspirować, a nie zaskakiwać. Zmieniajcie tempo i losujcie ponownie, jeśli coś nie pasuje.</p>
+      <ul>
+        <li>Przed startem wybierzcie kategorie, które są dla Was okej.</li>
+        <li>Po wylosowaniu możecie zrobić przerwę lub zakręcić jeszcze raz.</li>
+        <li>Jeśli któraś propozycja jest zbyt śmiała, zamieńcie ją na własny pomysł.</li>
+      </ul>
+      <div class="game-overlay__actions">
+        <button class="btn btn-primary" type="button" data-intro-start>Zaczynamy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="rules-modal" aria-hidden="true" role="dialog">
+    <div class="modal__dialog">
+      <div class="modal__header">
+        <h3>Zasady gry</h3>
+        <button class="modal__close" type="button" data-action="close-modal">Zamknij</button>
+      </div>
+      <div class="modal__body">
+        <p>Losujecie pozycję z koła i decydujecie, czy ją realizujecie. Możecie dowolnie usuwać lub zmieniać elementy koła, by pasowały do Waszych granic.</p>
+        <p>Gra nie zapisuje żadnych danych – korzystacie tylko we dwoje.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game-intro.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('rules-modal');
+      const openBtn = document.querySelector('[data-action="open-rules"]');
+      const closeBtn = modal?.querySelector('[data-action="close-modal"]');
+      const openModal = () => {
+        modal?.classList.add('is-open');
+        modal?.setAttribute('aria-hidden', 'false');
+      };
+      const closeModal = () => {
+        modal?.classList.remove('is-open');
+        modal?.setAttribute('aria-hidden', 'true');
+      };
+      openBtn?.addEventListener('click', openModal);
+      closeBtn?.addEventListener('click', closeModal);
+      modal?.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+      });
+    });
+  </script>
 </body>
 </html>

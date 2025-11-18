@@ -1,5 +1,5 @@
 const STORAGE_KEY_THEME = 'pary.theme';
-const ACCESS_PASSWORD = 'wedwoje25';
+const ACCESS_PASSWORD = (typeof window !== 'undefined' && window.ACCESS_CODE) || 'wedwoje25';
 const ACCESS_STORAGE_KEY = 'pary.access.pdp';
 const PLAN_ACCESS_STORAGE_KEY = 'momenty.planWieczoru.access';
 
@@ -110,7 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const successTarget = passwordForm.dataset.success || 'pytania-dla-par-room.html';
     const skipRoomKey = passwordForm.dataset.skipRoomKey === 'true';
     const requestedDeck = (passwordForm.dataset.deck || '').trim().toLowerCase();
-    const defaultErrorMessage = passwordError?.textContent || 'Niepoprawne hasło. Spróbuj ponownie.';
+    const defaultErrorMessage =
+      passwordError?.textContent || 'Niepoprawne hasło. Sprawdź maila po zakupie lub spróbuj ponownie.';
 
     if (passwordInput) {
       passwordInput.value = '';

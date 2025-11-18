@@ -23,117 +23,212 @@
       </div>
     </header>
 
+    <section class="app-hero">
+      <h2>Wybierz zabawę na dziś!</h2>
+      <p>Tworzymy bezpieczną, intymną przestrzeń do rozmów i śmiechu. Nie zapisujemy Waszych odpowiedzi na serwerze – gracie tylko w swoim pokoju.</p>
+      <div class="app-hero__tags">
+        <span class="game-tag game-tag--couples">Dla par</span>
+        <span class="game-tag game-tag--18">18+</span>
+        <span class="game-tag game-tag--family">Dla rodzin</span>
+        <span class="game-tag game-tag--safe">Wspólne hasło: wedwoje25</span>
+      </div>
+    </section>
+
     <section class="game-grid" id="game-grid">
-      <article class="game-card">
-        <h3 class="game-card__title">Pytania dla par</h3>
-        <p class="game-card__subtitle">Ponad sto spokojnych pytań, które pomagają zauważyć się na nowo.</p>
+      <article class="game-card" data-rules-key="pytania">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--couples">Dla par</span>
+            <span class="game-tag">Na rozmowę</span>
+          </div>
+          <h3 class="game-card__title">Pytania dla par</h3>
+          <p class="game-card__subtitle">Ponad sto spokojnych pytań, które pomagają zauważyć się na nowo.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--couples">Dla par</span>
           <a class="btn btn-primary" href="pytania-dla-par.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Jak dobrze mnie znasz</h3>
-        <p class="game-card__subtitle">Sprawdźcie codzienne nawyki i zaskoczcie się odpowiedziami.</p>
+      <article class="game-card" data-rules-key="znasz">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--couples">Dla par</span>
+            <span class="game-tag">Na rozmowę</span>
+          </div>
+          <h3 class="game-card__title">Jak dobrze mnie znasz</h3>
+          <p class="game-card__subtitle">Sprawdźcie codzienne nawyki i zaskoczcie się odpowiedziami.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--couples">Dla par</span>
           <a class="btn btn-primary" href="jak-dobrze-mnie-znasz.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Nigdy przenigdy</h3>
-        <p class="game-card__subtitle">Losuj zdania i bawcie się głosowaniem, co już się wydarzyło.</p>
+      <article class="game-card" data-rules-key="nigdy">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--18">18+</span>
+            <span class="game-tag">Na wieczór</span>
+          </div>
+          <h3 class="game-card__title">Nigdy przenigdy</h3>
+          <p class="game-card__subtitle">Losuj zdania i bawcie się głosowaniem, co już się wydarzyło.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--18">18+</span>
           <a class="btn btn-primary" href="nigdy-przenigdy.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Plan Wieczoru</h3>
-        <p class="game-card__subtitle">Krótki rytuał, który prowadzi do gotowego scenariusza na wspólny wieczór.</p>
+      <article class="game-card" data-rules-key="plan">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--couples">Dla par</span>
+            <span class="game-tag">Na randkę</span>
+          </div>
+          <h3 class="game-card__title">Plan Wieczoru</h3>
+          <p class="game-card__subtitle">Krótki rytuał, który prowadzi do gotowego scenariusza na wspólny wieczór.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--couples">Dla par</span>
           <a class="btn btn-primary" href="plan-wieczoru.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Planszówka dla dwojga</h3>
-        <p class="game-card__subtitle">Ruch po planszy, serduszka i pikantne zadania na rozgrzewkę.</p>
+      <article class="game-card" data-rules-key="planszowa">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--18">18+</span>
+            <span class="game-tag">Na wieczór</span>
+          </div>
+          <h3 class="game-card__title">Planszówka dla dwojga</h3>
+          <p class="game-card__subtitle">Ruch po planszy, serduszka i pikantne zadania na rozgrzewkę.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--18">18+</span>
           <a class="btn btn-primary" href="planszowa.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Planszówka romantyczna</h3>
-        <p class="game-card__subtitle">Czułe pytania i rytuały na planszy, żeby poczuć jeszcze więcej bliskości.</p>
+      <article class="game-card" data-rules-key="planszowaRom">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--couples">Dla par</span>
+            <span class="game-tag">Na randkę</span>
+          </div>
+          <h3 class="game-card__title">Planszówka romantyczna</h3>
+          <p class="game-card__subtitle">Czułe pytania i rytuały na planszy, żeby poczuć jeszcze więcej bliskości.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--couples">Dla par</span>
           <a class="btn btn-primary" href="planszowa-romantyczna.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Kółko i krzyżyk Wyzwanie</h3>
-        <p class="game-card__subtitle">Zaproście się do pokoju i układajcie trójki na planszy 4×4.</p>
+      <article class="game-card" data-rules-key="trio">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--couples">Dla par</span>
+            <span class="game-tag">Rywalizacja</span>
+          </div>
+          <h3 class="game-card__title">Kółko i krzyżyk Wyzwanie</h3>
+          <p class="game-card__subtitle">Zaproście się do pokoju i układajcie trójki na planszy 4×4.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--couples">Dla par</span>
           <a class="btn btn-primary" href="trio-challenge.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Zdrapka pozycji</h3>
-        <p class="game-card__subtitle">Delikatna zdrapka, która odkrywa losową pozycję na dziś.</p>
+      <article class="game-card" data-rules-key="zdrapka">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--18">18+</span>
+            <span class="game-tag">Na randkę</span>
+          </div>
+          <h3 class="game-card__title">Zdrapka pozycji</h3>
+          <p class="game-card__subtitle">Delikatna zdrapka, która odkrywa losową pozycję na dziś.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--18">18+</span>
           <a class="btn btn-primary" href="zdrapka-pozycji.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Pozycje na czas</h3>
-        <p class="game-card__subtitle">Wybierz czas i sprawdź, czy zdążycie zanim timer zacznie migać.</p>
+      <article class="game-card" data-rules-key="czas">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--18">18+</span>
+            <span class="game-tag">Na wieczór</span>
+          </div>
+          <h3 class="game-card__title">Pozycje na czas</h3>
+          <p class="game-card__subtitle">Wybierz czas i sprawdź, czy zdążycie zanim timer zacznie migać.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--18">18+</span>
           <a class="btn btn-primary" href="pozycje-na-czas.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Niegrzeczne koło</h3>
-        <p class="game-card__subtitle">Zakręćcie kołem z dwunastoma propozycjami i wybierzcie zabawę.</p>
+      <article class="game-card" data-rules-key="kolo">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--18">18+</span>
+            <span class="game-tag">Na wieczór</span>
+          </div>
+          <h3 class="game-card__title">Niegrzeczne koło</h3>
+          <p class="game-card__subtitle">Zakręćcie kołem z dwunastoma propozycjami i wybierzcie zabawę.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--18">18+</span>
           <a class="btn btn-primary" href="niegrzeczne-kolo.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Poznaj wszystkie pozycje</h3>
-        <p class="game-card__subtitle">Przejrzyj kolekcję pozycji i zapisz ulubione w jednej liście.</p>
+      <article class="game-card" data-rules-key="poznaj">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--18">18+</span>
+            <span class="game-tag">Inspiracje</span>
+          </div>
+          <h3 class="game-card__title">Poznaj wszystkie pozycje</h3>
+          <p class="game-card__subtitle">Przejrzyj kolekcję pozycji i zapisz ulubione w jednej liście.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--18">18+</span>
           <a class="btn btn-primary" href="poznaj-wszystkie-pozycje.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Tinder z pozycjami</h3>
-        <p class="game-card__subtitle">Przesuwaj propozycje w lewo lub prawo i znajdź wspólne inspiracje.</p>
+      <article class="game-card" data-rules-key="tinder">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag game-tag--18">18+</span>
+            <span class="game-tag">Na randkę</span>
+          </div>
+          <h3 class="game-card__title">Tinder z pozycjami</h3>
+          <p class="game-card__subtitle">Przesuwaj propozycje w lewo lub prawo i znajdź wspólne inspiracje.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag game-tag--18">18+</span>
           <a class="btn btn-primary" href="tinder-dla-sexu.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">5 • 7 • 10 sekund</h3>
-        <p class="game-card__subtitle">Dodaj graczy i odpowiadaj na pytania z licznikiem, który nie czeka.</p>
+      <article class="game-card" data-rules-key="time510">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag">Na wieczór</span>
+            <span class="game-tag game-tag--family">Dla znajomych</span>
+          </div>
+          <h3 class="game-card__title">5 • 7 • 10 sekund</h3>
+          <p class="game-card__subtitle">Dodaj graczy i odpowiadaj na pytania z licznikiem, który nie czeka.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag">Na wieczór</span>
           <a class="btn btn-primary" href="5-7-10.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
-      <article class="game-card">
-        <h3 class="game-card__title">Prawda czy Wyzwanie</h3>
-        <p class="game-card__subtitle">Losuj prawdy i wyzwania z wielu talii i zapraszaj innych do pokoju.</p>
+      <article class="game-card" data-rules-key="prawda">
+        <div class="game-card__body">
+          <div class="game-card__tags">
+            <span class="game-tag">Na randkę</span>
+            <span class="game-tag game-tag--couples">Dla par</span>
+          </div>
+          <h3 class="game-card__title">Prawda czy Wyzwanie</h3>
+          <p class="game-card__subtitle">Losuj prawdy i wyzwania z wielu talii i zapraszaj innych do pokoju.</p>
+        </div>
         <div class="game-card__actions">
-          <span class="game-tag">Na randkę</span>
           <a class="btn btn-primary" href="prawda-wyzwanie.html">Otwórz</a>
+          <button class="btn btn-ghost" data-action="rules">Zobacz zasady</button>
         </div>
       </article>
     </section>
@@ -143,14 +238,79 @@
         <h2 style="margin:0">Zasady i bezpieczeństwo</h2>
         <p>Wybierzcie tempo, pamiętajcie o komforcie obu stron i odkładajcie inne rozpraszacze.</p>
       </div>
+      <div class="app-header__actions">
+        <span class="game-tag game-tag--safe">Hasło: wedwoje25</span>
+      </div>
     </section>
   </div>
 
+  <div class="modal" id="rules-modal" aria-hidden="true" role="dialog">
+    <div class="modal__dialog">
+      <div class="modal__header">
+        <h3 id="rules-title">Zasady gry</h3>
+        <button class="modal__close" type="button" data-action="close-modal">Zamknij</button>
+      </div>
+      <div class="modal__body" id="rules-body"></div>
+    </div>
+  </div>
+
   <script>
+    const GAME_RULES = {
+      pytania: 'Losujcie pytania i odpowiadajcie naprzemiennie. Możecie pominąć każde pytanie i wrócić do niego później.',
+      znasz: 'Dodajcie graczy, zgadujcie swoje wybory i sprawdźcie, kto zna codzienne nawyki partnera.',
+      nigdy: 'Losujcie zdania "Nigdy przenigdy" i głosujcie, czy już to zrobiliście. Luz i śmiech ważniejsze niż punktacja.',
+      plan: 'Przejdźcie kilka kroków, by ustalić, jaki wieczór jest Wam dziś potrzebny: spokojny, romantyczny czy szalony.',
+      planszowa: 'Wejdźcie do pokoju, rzućcie kostką i przesuwajcie pionek. Zadania możecie łagodzić lub pomijać zgodnie z granicami.',
+      planszowaRom: 'Podobnie jak wersja pikantna, ale z czułymi pytaniami i gestami budującymi bliskość.',
+      trio: 'Połączcie się w pokoju, ustawcie kolory i układajcie trójki na planszy 4×4. Przegrany losuje zadanie.',
+      zdrapka: 'Odkrywajcie losowe pozycje w swoim tempie. Możecie pominąć każdą, która nie pasuje.',
+      czas: 'Losujcie propozycję, ustawcie czas i grajcie, dopóki timer nie zacznie mrugać. Komfort ponad wynik.',
+      kolo: 'Zakręćcie kołem, wylosujcie propozycję i zdecydujcie, czy ją realizujecie, czy losujecie kolejną.',
+      poznaj: 'Przeglądajcie katalog pozycji, zapisujcie ulubione i układajcie własne listy inspiracji.',
+      tinder: 'Przesuwajcie w lewo lub prawo, aby znaleźć wspólne inspiracje. Tylko zgodne match’e trafiają do wspólnej listy.',
+      time510: 'Dołączcie do pokoju, losujcie pytania i odpowiadajcie w limicie 5/7/10 sekund.',
+      prawda: 'Losujcie prawdy i wyzwania z wielu talii, wybierzcie tryb host/join i bawcie się w pokoju ze znajomymi.'
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
       const cards = document.querySelectorAll('.game-card');
       cards.forEach((card, index) => {
         setTimeout(() => card.classList.add('game-card--visible'), 80 * index);
+      });
+
+      const modal = document.getElementById('rules-modal');
+      const modalTitle = document.getElementById('rules-title');
+      const modalBody = document.getElementById('rules-body');
+
+      const openModal = (title, body) => {
+        modalTitle.textContent = title;
+        modalBody.textContent = body;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+      };
+
+      modal?.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      modal?.querySelector('[data-action="close-modal"]')?.addEventListener('click', closeModal);
+
+      document.querySelectorAll('[data-action="rules"]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const card = button.closest('.game-card');
+          const key = card?.dataset.rulesKey;
+          if (!key) return;
+          const body = GAME_RULES[key] || 'Opis gry w przygotowaniu.';
+          const title = card.querySelector('.game-card__title')?.textContent || 'Zasady gry';
+          openModal(title, body);
+        });
       });
     });
   </script>

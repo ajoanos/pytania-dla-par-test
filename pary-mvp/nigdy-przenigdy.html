@@ -15,23 +15,29 @@
   <div class="access-screen">
     <div class="access-card">
       <h1 class="access-card__title">Nigdy przenigdy</h1>
-      <p class="access-card__subtitle">Losujcie zdania, pokazujcie kciuki i bawcie się reakcjami bez presji.</p>
-      <ol class="access-card__steps">
-        <li>Stwórzcie pokój i podzielcie się kodem.</li>
-        <li>Losujcie kolejne karty „Nigdy przenigdy”.</li>
-        <li>Każdy decyduje, czy chce odpowiedzieć lub pominąć.</li>
-      </ol>
-      <form class="access-card__form" data-target-url="nigdy-przenigdy-room.html">
-        <input type="password" class="access-card__input" placeholder="Hasło" autocomplete="current-password" />
+      <p class="access-card__subtitle">Losuj zdania „Nigdy przenigdy…” i głosujcie kciukami, czy już to zrobiliście. Śmiech gwarantowany.</p>
+      <ul class="access-card__tips">
+        <li>Jedna osoba tworzy pokój i udostępnia link pozostałym.</li>
+        <li>Głosujcie w swoim tempie – punkty są tylko pretekstem do rozmowy.</li>
+        <li>Możecie pominąć zdania, które nie pasują do Waszego nastroju.</li>
+      </ul>
+      <form
+        id="password-form"
+        class="access-card__form"
+        data-success="nigdy-przenigdy-room.html"
+        data-storage-key="pary.access.npn"
+      >
+        <input type="password" id="access-password" class="access-card__input" placeholder="Hasło" autocomplete="current-password" required />
         <div class="access-card__actions">
-          <button type="submit" class="btn btn-primary">Start</button>
+          <button type="submit" class="btn btn-primary">Potwierdź</button>
           <a class="btn btn-ghost" href="index.html">Wróć</a>
         </div>
-        <div class="access-card__error"></div>
+        <div class="access-card__error" id="password-error"></div>
       </form>
-      <p class="access-card__safety">Wasz pokój jest prywatny. Zatrzymajcie grę, jeśli coś jest niekomfortowe.</p>
+      <p class="access-card__safety">Wasze odpowiedzi i wybory są przetwarzane tylko w prywatnym pokoju. Nie zapisujemy treści rozmów na serwerze. Możecie w każdej chwili przerwać grę.</p>
     </div>
   </div>
   <script src="access.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>
