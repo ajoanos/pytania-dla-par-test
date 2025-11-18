@@ -33,6 +33,7 @@
           <div class="game-switcher__panel">
             <ul class="game-switcher__list">
               <li><a class="game-switcher__link" href="pytania-dla-par.html" aria-current="page">Pytania dla par</a></li>
+              <li><a class="game-switcher__link" href="jak-dobrze-mnie-znasz.html">Jak dobrze mnie znasz</a></li>
               <li><a class="game-switcher__link" href="nigdy-przenigdy.html">Nigdy przenigdy</a></li>
               <li><a class="game-switcher__link" href="plan-wieczoru.html">Plan Wieczoru – We Dwoje</a></li>
               <li><a class="game-switcher__link" href="planszowa.html">Planszówka dla dwojga (dla dorosłych)</a></li>
@@ -52,6 +53,28 @@
     </header>
 
     <div id="room-content" class="room__content" hidden>
+      <section class="card card--categories" id="category-card">
+        <div class="panel__header">
+          <h2 id="question-filter-header">Kategorie pytań</h2>
+          <p class="panel__hint" id="question-filter-hint">
+            Wybierz jedną lub kilka kategorii, aby losować pytania, które najbardziej Was interesują.
+          </p>
+        </div>
+        <div class="question__filter" id="question-filter">
+          <label class="form__field" id="category-select-wrapper">
+            <span>Kategoria</span>
+            <select id="category-select">
+              <option value="">Dowolna</option>
+            </select>
+          </label>
+          <div class="category-list" id="category-chip-list" hidden></div>
+          <div class="category-actions" id="category-chip-actions" hidden>
+            <button type="button" class="btn btn--ghost" id="category-select-all">Wybierz wszystkie</button>
+            <button type="button" class="btn btn--ghost" id="category-clear">Losuj dowolną</button>
+          </div>
+        </div>
+      </section>
+
       <section class="card card--participants">
         <h2>Uczestnicy</h2>
         <ul id="participants-list" class="participants"></ul>
@@ -72,14 +95,6 @@
           </div>
         </article>
         <div class="question__reactions" id="reaction-buttons" hidden></div>
-        <div class="question__filter" id="question-filter">
-          <label class="form__field">
-            <span>Kategoria</span>
-            <select id="category-select">
-              <option value="">Dowolna</option>
-            </select>
-          </label>
-        </div>
       </section>
 
       <section class="card card--chat" id="chat-card">
@@ -132,7 +147,7 @@
       </section>
 
       <section class="card card--catalog" id="category-browser">
-        <h2>Kategorie pytań</h2>
+        <h2>Rozwiń kategorię i wybierz jakie pytanie chcesz zadać</h2>
         <div class="catalog">
           <ul id="catalog-categories" class="catalog__categories"></ul>
           <div id="catalog-questions" class="catalog__questions" hidden>
